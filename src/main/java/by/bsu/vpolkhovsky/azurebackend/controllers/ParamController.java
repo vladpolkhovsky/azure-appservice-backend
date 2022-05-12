@@ -21,17 +21,17 @@ public class ParamController {
         values = new HashMap<>();
     }
 
-    @PostMapping(value = "/set/{var_name}")
+    @PostMapping(value = "api/set/{var_name}")
     HttpEntity<String> setVariable(@PathVariable(value = "var_name") String varName, @RequestParam(value = "value", required = true) String varValue) {
         return new HttpEntity<>(Optional.ofNullable(values.put(varName, varValue)).orElse(varValue));
     }
 
-    @GetMapping(value = "/get/{var_name}")
+    @GetMapping(value = "api/get/{var_name}")
     HttpEntity<String> getVariable(@PathVariable(value = "var_name") String varName) {
         return new HttpEntity<>(Optional.ofNullable(values.get(varName)).orElse("null"));
     }
 
-    @GetMapping(value = "/all")
+    @GetMapping(value = "api/all")
     HttpEntity<List<Variable>> getVariables() {
 
         List<Variable> collect = values.entrySet().stream().map(
